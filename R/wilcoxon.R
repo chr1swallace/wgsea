@@ -19,7 +19,7 @@ function(p,snps.in,weights=NULL,binsize=0.05) {
   n0 <- length(snps.in)
   if(!is.null(weights)) {
     n <- length(weights)
-    bin <- cut(weights,seq(0,0.5,by=binsize))
+    bin <- cut(weights,seq(min(weights),max(weights),by=binsize))
     f <- table(bin)/n
     f0 <- table(bin[snps.in])/n0
     bin.in <- bin[snps.in]
