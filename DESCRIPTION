@@ -1,8 +1,8 @@
 Package: wgsea
 Type: Package
 Title: Wilcoxon based gene set enrichment analysis
-Version: 1.07.01
-Date: 2013-04-17
+Version: 1.7.2
+Date: 2013-07-03
 Author: Chris Wallace
 Maintainer: Chris Wallace <chris.wallace@cimr.cam.ac.uk>
 Description: Non parametric alternative to Kolmogorov-Smirnov based
@@ -19,5 +19,5 @@ Collate:
     'pairtest.R'
     'plotting.R'
     'scoretest.R'
-    'spearman.R'
     'wilcoxon.R'
+    'wgsea-package.R'
