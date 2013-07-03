@@ -13,7 +13,8 @@ pairtest <- function(case,control,n.perm=0,pheno.perm=NULL) {
     return(p.value(single.snp.tests(phenotype=pheno,snp.data=d),df=1))
   }
   result <- matrix(NA,ncol(case),n.perm)
-  pheno.perm <- genperms(pheno,n.perm)
+  if(is.null(pheno.perm))
+    pheno.perm <- genperms(pheno,n.perm)
   for(i in 1:n.perm) {
     cat(".")
     result[,i] <- p.value(single.snp.tests(phenotype=pheno.perm[,i],snp.data=d),df=1)
