@@ -20,7 +20,7 @@
 \description{
   Given a vector of Wilcoxon statistics generated through
   permutation, plot theoretical and esitimated variance by
-  cumulative nuber of permutations
+  cumulative number of permutations
 }
 \examples{
 x<- matrix(exp(-rexp(200000)),nrow=2000)
