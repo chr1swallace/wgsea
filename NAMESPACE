@@ -1,4 +1,5 @@
-export(Z.value)
 export(genperms)
 export(pairtest)
+export(varplot)
 export(wilcoxon)
+export(Z.value)

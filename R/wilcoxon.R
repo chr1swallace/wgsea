@@ -60,11 +60,25 @@ function(p,snps.in,weights=NULL,binsize=0.05) {
   n0 <- length(snps.in)
   if(!is.null(weights)) {
     n <- length(weights)
-    bin <- cut(weights,seq(min(weights),max(weights),by=binsize))
-    f <- table(bin)/n
+    seq.cut<-seq(min(weights),max(weights),by=binsize)
+    if(max(seq.cut)<=max(weights))
+    	seq.cut[ which.max(seq.cut) ] <- max(weights) + binsize/100
+    	
+    if(min(seq.cut)>=min(weights))
+    	seq.cut[ which.min(seq.cut) ] <- min(weights) - binsize/100 
+    bin <- cut(weights,seq.cut)
+    t.bin<-table(bin)
+    if(min(t.bin)<5)
+    	stop("Data is too sparse for the weights and binsize parameters input")
+    f <- t.bin/n
     f0 <- table(bin[snps.in])/n0
     bin.in <- bin[snps.in]
     w <- f[bin.in]/f0[bin.in]
+    if(sum(is.na(w))){
+      ## unlikely that we reach here but in case we do and to prevent an
+      ## score of NA being returned silently throw an error.
+    	stop("Propensity score and selected binsize incompatible; NA's generated")
+    }
   } else {
     w <- NULL
   }
@@ -73,9 +87,9 @@ function(p,snps.in,weights=NULL,binsize=0.05) {
     nc <- ncol(p)
     W <- numeric(nc)
     for(j in 1:nc) {
-      R <- rank(p[,j])[snps.in]
-      if(!is.null(weights))
-        R <- R * w
+      #R <- rank(p[,j])[snps.in]
+      #if(!is.null(weights))
+      #  R <- R * w
       W[j] <- calc.wilcoxon(p[,j],snps.in,n0,w=w)
     }
   } else {
