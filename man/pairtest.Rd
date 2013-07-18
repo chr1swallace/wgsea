@@ -2,7 +2,8 @@
 \alias{pairtest}
 \title{Generate p values for each SNP for case-control comparisons.}
 \usage{
-  pairtest(case, control, n.perm = 0, pheno.perm = NULL)
+  pairtest(case, control, n.perm = 0, pheno.perm = NULL,
+    quiet = FALSE)
 }
 \arguments{
   \item{case}{\code{SnpMatrix} object holding genotypes of
@@ -20,6 +21,9 @@
   \code{n.perm} is to supply a matrix of alternative
   phenotypes, with each column relating to a different
   permutation.}
+
+  \item{quiet}{set TRUE to suppress the printing of
+  progress dots}
 }
 \value{
   If \code{n.perm=0}, a vector of p values, one for each

@@ -97,3 +97,4 @@ function(p,snps.in,weights=NULL,binsize=0.05) {
   }
   return(W)
 }
+

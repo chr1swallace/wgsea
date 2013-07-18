@@ -14,6 +14,7 @@
 ##' @param pheno.perm An alternative to specifying \code{n.perm} is to supply a
 ##' matrix of alternative phenotypes, with each column relating to a different
 ##' permutation.
+##' @param quiet set TRUE to suppress the printing of progress dots
 ##' @return If \code{n.perm=0}, a vector of p values, one for each SNP (each
 ##' column in the \code{case} and \code{control} objects.  If \code{n.perm>0},
 ##' a matrix of p values, each column representing the results of a different
@@ -30,11 +31,18 @@
 ##' control <- snps.10[subject.support$cc==0,]
 ##' summary(pairtest(case,control))
 ##' 
-pairtest <- function(case,control,n.perm=0,pheno.perm=NULL) {
-  if(!is(case,"SnpMatrix") || !is(control,"SnpMatrix") || !identical(colnames(case),colnames(control)))
+pairtest <- function(case,control,n.perm=0,pheno.perm=NULL,quiet=FALSE) {
+  if(!is(case,"SnpMatrix") || !is(control,"SnpMatrix") || !identical(colnames(case),colnames(control))) {
+    print(class(case))
+    print(class(control))
+    print(colnames(case))
+    print(colnames(control))
     stop("case and control SnpMatrix objects must contain the same SNPs, in the same order\n")
+  }
   d <- new("SnpMatrix",rbind2(case,control))
   if(!is.null(pheno.perm)) {
+    if(!is.matrix(pheno.perm))
+      pheno.perm <- as.matrix(pheno.perm, ncol=1)
     if(nrow(pheno.perm) != nrow(d))
       stop("length of phenotype vector must equal total number of cases and controls.\n")
     n.perm <- ncol(pheno.perm)
@@ -48,7 +56,8 @@ pairtest <- function(case,control,n.perm=0,pheno.perm=NULL) {
   if(is.null(pheno.perm))
     pheno.perm <- genperms(pheno,n.perm)
   for(i in 1:n.perm) {
-    cat(".")
+    if(!quiet)
+      cat(".")
     result[,i] <- p.value(single.snp.tests(phenotype=pheno.perm[,i],snp.data=d),df=1)
   }
   return(result)

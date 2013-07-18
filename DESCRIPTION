@@ -1,11 +1,15 @@
 Package: wgsea
 Type: Package
 Title: Wilcoxon based gene set enrichment analysis
-Version: 1.7.2
+Version: 1.7.3
 Date: 2013-07-03
-Author: Chris Wallace
-Maintainer: Chris Wallace <chris.wallace@cimr.cam.ac.uk>, Olly Burren
+Authors@R: c(person("Chris", "Wallace", role=c("aut","cre"),
+    email = "chris.wallace@cimr.cam.ac.uk"),
+    person("Olly","Burren", role="ctb",
+    email="oliver.burren@cimr.cam.ac.uk"))
+Author: Chris Wallace with contributions from Olly Burren
     <oliver.burren@cimr.cam.ac.uk>
+Maintainer: Chris Wallace <chris.wallace@cimr.cam.ac.uk>
 Description: Non parametric alternative to Kolmogorov-Smirnov based
     standard GSEA testing.
 License: GPL
@@ -23,3 +27,4 @@ Collate:
     'plotting.R'
     'scoretest.R'
     'wilcoxon.R'
+    'wgsea-package.R'

@@ -17,7 +17,7 @@
   Package\cr Version: \tab 1.0\cr Date: \tab 2012-04-18\cr
   License: \tab GPL\cr }
 
-  See the vignetter for further details.
+  See the vignette for further details.
 }
 \examples{
 vignette(package="wgsea")
