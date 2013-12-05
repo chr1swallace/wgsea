@@ -1,5 +1,6 @@
 2013-07-18 Olly Burren, Chris Wallace
 
+	* v1.8
 	* Bugfix for propensity weights in wilcoxon() function
 	* Introduction of unit tests, by Olly Burren
 
